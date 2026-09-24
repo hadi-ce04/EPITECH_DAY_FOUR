@@ -1,0 +1,14 @@
+#TASK 3.1
+x =input("Enter a clear sentence: ")
+key =int(input("Enter a key: "))
+encrypted_message = ""
+msg = x.lower()
+for char in msg :
+    if 'a' <= char <= 'z' :
+        position = ord(char) - ord('a')
+        newpos = (position+key) % 26
+        newchar  = chr ( newpos  + ord('a'))
+        encrypted_message += newchar 
+    else : 
+        encrypted_message += char
+print(encrypted_message)
