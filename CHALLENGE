@@ -1,0 +1,5 @@
+#CHALLENGE
+number, string = int(input("Enter a number: ")), input("Enter a string: ")
+if number == 0: quit()
+elif any(c in "aeiouAEIOU" for c in string) or number >= 42: print(number)
+else: print(string)
