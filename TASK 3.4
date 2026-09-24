@@ -1,0 +1,52 @@
+#TASK 3.4
+ciphertext = input("Enter encrypted text: ")
+keylength = int(input("Enter key length: "))
+
+cleantext = ""
+for char in ciphertext:
+    if "a" <= char <= "z" or "A" <= char <= "Z":
+        cleantext += char.lower()
+
+key = ""
+for i in range(keylength):
+    subtext = cleantext[i::keylength]
+    if subtext != "":
+        counts = {}
+        for char in subtext:
+            if char in counts:
+                counts[char] += 1
+            else:
+                counts[char] = 1
+
+        topchar = ""
+        topcount = 0
+        for char in counts:
+            if counts[char] > topcount:
+                topcount = counts[char]
+                topchar = char
+
+        shift = (ord(topchar) - ord("e")) % 26
+        key += chr(shift + ord("a"))
+
+print("Discovered Key:", key)
+
+decrypted = ""
+keyindex = 0
+
+for char in ciphertext:
+    if "a" <= char <= "z":
+        shift = ord(key[keyindex]) - ord("a")
+        newpos = (ord(char) - ord("a") - shift) % 26
+        decrypted += chr(newpos + ord("a"))
+        keyindex = (keyindex + 1) % len(key)
+    elif "A" <= char <= "Z":
+        shift = ord(key[keyindex]) - ord("a")
+        newpos = (ord(char.lower()) - ord("a") - shift) % 26
+        decrypted += chr(newpos + ord("a")).upper()
+        keyindex = (keyindex + 1) % len(key)
+    else:
+        decrypted += char
+
+print("Decrypted Message:")
+print(decrypted)
+
