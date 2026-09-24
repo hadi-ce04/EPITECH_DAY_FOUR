@@ -1,0 +1,41 @@
+#TASK 3.3
+x = int(input("Hello! \n 1 : To Encrypt \n 2: To Decrypt \n "))
+
+if x == 1:
+    print("Encryption Process: ")
+    text = input("Enter your message: ").lower()
+    key = input("Enter your keyword: ").lower()
+    result = ""
+    keyindex = 0
+
+    for char in text:
+        if 'a' <= char <= 'z':
+            shift = ord(key[keyindex]) - ord('a')
+            newpos = (ord(char) - ord('a') + shift) % 26
+            result += chr(newpos + ord('a'))
+            keyindex = (keyindex + 1) % len(key)
+        else:
+            result += char
+
+    print("\nEncrypted text:", result)
+
+elif x == 2:
+    print("Decryption Process: ")
+    text = input("Enter your message: ").lower()
+    key = input("Enter your keyword: ").lower()
+    result = ""
+    keyindex = 0
+
+    for char in text:
+        if 'a' <= char <= 'z':
+            shift = ord(key[keyindex]) - ord('a')
+            newpos = (ord(char) - ord('a') - shift) % 26
+            result += chr(newpos + ord('a'))
+            keyindex = (keyindex + 1) % len(key)
+        else:
+            result += char
+
+    print("\nDecrypted text:", result)
+
+else:
+    print("ERROR !")
